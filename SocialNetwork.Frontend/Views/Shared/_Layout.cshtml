@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/css/style.css">
+    <title>@ViewBag.Title - Social Network</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Social Network", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Role", "Index", "UserRoles")</li>
+                    <li>@Html.ActionLink("Department", "Index", "UserDepartment")</li>
+                    <li>@Html.ActionLink("Gender", "Index", "Genders")</li>
+                    <li>@Html.ActionLink("User", "Index", "Users")</li>
+                    <li>@Html.ActionLink("Category", "Index", "Categories")</li>
+                    <li>@Html.ActionLink("Post", "Index", "Posts")</li>
+                    <li>@Html.ActionLink("Download", "Download", "Files")</li>
+
+
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div>
+        @RenderBody()
+        <hr />
+    </div>
+    <footer>
+        <div class="container">
+            <div class="noi-dung about">
+                <h2>About us</h2>
+                <p> We are group 17.Team member include Tran Van Hieu Nghia, Le Duc Anh, Trinh Ngoc Phuc,Hieu Le.This is a website where you can help to improve the University facilities and quality by observing staff idea posted</p>
+                <ul class="social-icon">
+                    <li><a href="https://www.facebook.com/PiuANoob"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://www.facebook.com/profile.php?id=100004836245897"><i class="fa fa-instagram"></i></a></li>
+                    <li><a href="https://www.facebook.com/PiuANoob"><i class="fa fa-youtube"></i></a></li>
+                </ul>
+            </div>
+
+            <div class="noi-dung links">
+                <h2>Links</h2>
+                <ul>
+                    <li><a href="#">Home page</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="noi-dung contact">
+                <h2>Contact</h2>
+                <ul class="info">
+                    <li>
+                        <span><i class="fa fa-map-marker"></i></span>
+                        <span>
+                            20 Cộng Hòa,Phường 12<br />
+                            Quận Tân Bình, Thành Phố Hồ Chí Minh<br />
+                            Việt Nam
+                        </span>
+                    </li>
+                    <li>
+                        <span><i class="fa fa-phone"></i></span>
+                        <p>
+                            <a>Phone: 0911911260</a>
+                            <br />
+                            <a>Hotline: 033 9671100 | 0911911260</a>
+                        </p>
+                    </li>
+                    <li>
+                        <span><i class="fa fa-envelope"></i></span>
+                        <p><a>nghia17042001@gmail.com</a></p>
+                    </li>
+                    <li>
+                        <form class="form">
+                            <input type="email" class="form__field" placeholder="Subscribe Email" />
+                            <button type="button" class="btn btn--primary  uppercase">Send</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

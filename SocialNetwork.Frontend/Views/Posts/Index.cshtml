@@ -1,0 +1,69 @@
+﻿@model IEnumerable<SocialNetwork.Domain.Post>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-success text-center">Blog Posts</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PostDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contents)
+        </th>
+        <th>
+            Category
+        </th>
+
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.Raw(item.Contents)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Post_id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Post_id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Post_id })
+            </td>
+        </tr>
+    }
+
+</table>
+

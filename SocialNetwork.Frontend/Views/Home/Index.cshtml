@@ -1,0 +1,133 @@
+﻿@using SocialNetwork.Domain;
+@model IPagedList<SocialNetwork.Domain.Post>
+@using PagedList.Mvc;
+@using PagedList;
+
+
+@{
+    ViewBag.Title = "Home Page";
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 10);
+}
+<div class="container body-content">
+    <div class="img">
+        <img class="mySlides w3-animate-fading" src="~/Content/img/trangchu1.jpg" style=width:1000px;height:600px>
+        <img class="mySlides w3-animate-fading" src="~/Content/img/trangchu2.jpg" style=width:1000px;height:600px>
+        <img class="mySlides w3-animate-fading" src="~/Content/img/trangchu3.jpg" style=width:1000px;height:600px>
+        <img class="mySlides w3-animate-fading" src="~/Content/img/trangchu4.jpg" style=width:1000px;height:600px>
+        <img class="mySlides w3-animate-fading" src="~/Content/img/trangchu5.jpg" style=width:1000px;height:600px>
+    </div>
+    <script>
+        var myIndex = 0;
+        carousel();
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            myIndex++;
+            if (myIndex > x.length) { myIndex = 1 }
+            x[myIndex - 1].style.display = "block";
+            setTimeout(carousel, 9000);
+        }
+    </script>
+    <h2 class="text-success text-center">Blog Posts</h2>
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+            @Html.ActionLink("Create New", "Create", "Posts")
+            <br /> <br />
+
+            @foreach (var item in Model)
+            {
+                <div class=" form-group">
+                    <div class=" col-md-1">
+
+                        @{
+                            var firstOrDefault = item.User;
+                        }
+
+                        @if (firstOrDefault != null && !string.IsNullOrEmpty(firstOrDefault.Image))
+                        {
+                            <img src="@Url.Content(item.User.Image)" alt="Image" style="width: 50px;height:50px" />
+                        }
+                    </div>
+
+                    <div class=" col-md-11">
+                        <span style="font-weight: bold;color:red">
+                            @Html.DisplayFor(modelItem => item.User.Fullname)
+                        </span> post on <span style="font-size:small"> @Html.DisplayFor(modelItem => item.PostDate) </span>
+                        <p style="font-weight: bold;color: blue">
+                            Tai tồ:
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </p>
+
+                        <p style=" font-weight: bold;">
+                            Mô tả nè mấy thằng lồn:
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </p>
+
+                        <p style="">
+                            Content nè mấy thằng lồn:
+                            @Html.Raw(item.Contents)
+                        </p>
+                        <p style="">
+                            Loại sản phẩm nè mấy thằng lồn:
+                            @Html.DisplayFor(modelItem => item.Category.Name)
+                        </p>
+
+                        <p stlye="">
+                            <a href="@Url.Action("Download","Files")">Xem thêm</a>
+                        </p>
+
+                        @Html.ActionLink("Download File", "Download", "Files", new { id = item.Post_id }, new { }) &nbsp;
+
+                        @Html.ActionLink("Comment", "CreateComment", "Posts", new { id = item.Post_id }, new { }) &nbsp;
+
+                        @Html.ActionLink("Edit", "Edit", "Posts", new { id = item.Post_id }, new { }) &nbsp;
+                        @Html.ActionLink("Delete", "Delete", "Posts", new { id = item.Post_id }, new { })
+                        <br /> <br />
+                    </div>
+                </div>
+
+                <br />
+                <br /> <br />
+
+                foreach (var item2 in item.PostComments)
+                {
+                    <div style="padding-left: 60px">
+                        <div class="col-md-1">
+                            @if (!string.IsNullOrEmpty(item2.User.Image))
+                            {
+                                <img src="@Url.Content(item2.User.Image)" alt="Image" style="width: 40px;height:40px" />
+                            }
+                        </div>
+                        <div class="col-md-11">
+                            <span style="font-size: large;color:green"> @Html.DisplayFor(modelItem => item2.User.Fullname)</span>
+                            comment on <span style="font-size: small"> @Html.DisplayFor(modelItem => item2.CommentDate)</span>
+
+                            <p style="color: black"> @Html.Raw(item2.Comment) </p>
+
+                            @Html.ActionLink("Edit comment", "Edit", "Posts", new { id = item2.PostComment_id }, new { })
+                            <a>&nbsp;</a>
+                            {
+                            @Html.ActionLink("Delete comment", "Delete", "Posts", new { id = item2.PostComment_id },
+                                new { onclick = "return confirm('Are you sure you wish to delete this comment?');" })
+
+                            }
+                        </div>
+                    </div>
+                    <br />
+                    <hr />
+                }
+                <br /><br />
+                <hr />
+            }
+            @Html.PagedListPager(Model, i => Url.Action("Index", "Home", new { i, search = Request.QueryString["search"] }))
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+</div>
+

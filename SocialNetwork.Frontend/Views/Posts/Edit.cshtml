@@ -1,0 +1,75 @@
+﻿@model SocialNetwork.Domain.Post
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<script src="~/ckeditor/ckeditor.js"></script>
+<script src="~/ckeditor/adapters/jquery.js"></script>
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Post</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Post_id)
+    @Html.HiddenFor(model => model.User_id)
+    @Html.HiddenFor(model => model.PostDate)
+    
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", placeholder = "Post Description" })
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Contents, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Contents, new { @class = "ckeditor", placeholder = "Content" })
+            @Html.ValidationMessageFor(model => model.Contents)
+        </div>
+    </div>
+
+    <hr />
+    <h4>Category</h4>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Category_id, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Category_id", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Category_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", "Home")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
